@@ -57,3 +57,14 @@ code here!)
 Changes to this repo **must not** demand that repos derived from it be changed,
 but it **should** be possible to update them to a more recent version of the
 archetype fairly easily.
+
+## Licensing
+
+This repo was originally forked from [typescript-plugin-archetype](https://github.com/comuns-rpgmaker/typescript-plugin-archetype) 
+by [comuns-rpgmaker](https://github.com/comuns-rpgmaker), which was licensed under zlib.
+The text of this license has been preserved in the file `typescript-plugin-archetype.LICENSE`.
+
+This RPG Maker plugin is an addon to the [DotMoveSystem](https://github.com/unagiootoro/RPGMZ/blob/master/DotMoveSystem.js) plugin by [unagiootoro](https://github.com/unagiootoro) and uses code from [DotMoveSystem_FunctionEx](https://github.com/unagiootoro/RPGMZ/blob/master/DotMoveSystem_FunctionEx.js) as reference for implementation details.
+Both of these plugins are licensed under MIT. The exact text of the license can be found in the file `unagiootoro.LICENSE`.
+
+The rest of the code in this project is licensed under MIT. See the `LICENSE` file for the exact details.
