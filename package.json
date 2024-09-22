@@ -1,8 +1,8 @@
 {
   "name": "rmmz-typescript-plugin-archetype",
   "version": "1.0.0",
-  "description": "RPG Maker MZ Typescript Plugin Archetype",
-  "namespace": "Comuns.Typescript.Archetype",
+  "description": "DotMoveSystem addon that lets the user create presets for character DotMoveSystem properties.",
+  "namespace": "KCDev.DotMoveSystem.Preset",
   "scripts": {
     "prebuild": "mz-mtdt -i ./plugin-metadata.yaml -o dist/annotations.js",
     "build": "rollup -c",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/comuns-rpgmaker/typescript-plugin-archetype"
+    "url": "https://github.com/kchavezdev/RPGMP_DotMoveSystem_Presets"
   },
   "keywords": [
     "RMMZ"
