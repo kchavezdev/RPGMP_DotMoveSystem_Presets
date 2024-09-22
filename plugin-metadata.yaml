@@ -1,8 +1,90 @@
 target: MZ
 author: Comuns
 description: Typescript plugin archetype
-help: |-  
+help: |-
     Typescript Plugin Archetype.
 
     This is a plugin archetype, it does not provide any functionality, only a
     template for other plugins.
+structs:
+    - name: CharacterInfo
+      params:
+          - name: width
+            description:
+                default: Width of the character.
+            text:
+                default: Width
+            type: number
+            decimals: 2
+            default: 1
+
+          - name: height
+            description:
+                default: Height of the character.
+            text:
+                default: Height
+            type: number
+            decimals: 2
+            default: 1
+
+          - name: offsetX
+            description:
+                default: X offset of the character.
+            text:
+                default: X Offset
+            type: number
+            min: -1000
+            decimals: 2
+            default: 0
+
+          - name: offsetY
+            description:
+                default: Y offset of the character.
+            text:
+                default: Y Offset
+            type: number
+            min: -1000
+            decimals: 2
+            default: 0
+
+          - name: slideLengthX
+            description:
+                default: |-
+                    Slide length of the character on the x axis.
+                    This is used for corner correction when moving.
+            text:
+                default: X-Axis Slide Length
+            type: number
+            decimals: 2
+            default: 0.5
+
+          - name: slideLengthY
+            description:
+                default: |-
+                    Slide length of the character on the y axis.
+                    This is used for corner correction when moving.
+            text:
+                default: Y-Axis Slide Length
+            type: number
+            decimals: 2
+            default: 0.5
+
+          - name: transferOffsetX
+            description:
+                default: X coordinate offset when moving to a location.
+            text:
+                default: Transfer X Offset
+            type: number
+            min: -1000
+            decimals: 2
+            default: 0
+
+          - name: transferOffsetY
+            description:
+                default: Y coordinate offset when moving to a location.
+            text:
+                default: Transfer Y Offset
+            type: number
+            min: -1000
+            decimals: 2
+            default: 0
