@@ -1,0 +1,66 @@
+diff --git a/node_modules/rmmz-types/lib/externals.d.ts b/node_modules/rmmz-types/lib/externals.d.ts
+index 738fd40..fdfe7a9 100644
+--- a/node_modules/rmmz-types/lib/externals.d.ts
++++ b/node_modules/rmmz-types/lib/externals.d.ts
+@@ -1,8 +1,8 @@
+-import PIXI from "pixi.js"
+-import nw from "nw.gui"
+-import localforage from "localforage"
+-import pako from "pako"
+-import effekseer from "effekseer"
++import * as PIXI from "pixi.js"
++import * as nw from "nw.gui"
++import * as localforage from "localforage"
++import * as pako from "pako"
++import * as effekseer from "effekseer"
+ 
+ declare global {
+   export class VorbisDecoder {
+diff --git a/node_modules/rmmz-types/lib/index.d.ts b/node_modules/rmmz-types/lib/index.d.ts
+index de73580..979ec37 100644
+--- a/node_modules/rmmz-types/lib/index.d.ts
++++ b/node_modules/rmmz-types/lib/index.d.ts
+@@ -6,4 +6,5 @@ export * from "./core"
+ export * from "./managers"
+ export * from "./objects"
+ export * from "./scenes"
++export * from "./sprites"
+ export * from "./windows"
+diff --git a/node_modules/rmmz-types/lib/objects/Game_Actor.d.ts b/node_modules/rmmz-types/lib/objects/Game_Actor.d.ts
+index cc77d85..ce3735c 100644
+--- a/node_modules/rmmz-types/lib/objects/Game_Actor.d.ts
++++ b/node_modules/rmmz-types/lib/objects/Game_Actor.d.ts
+@@ -98,7 +98,7 @@ export declare class Game_Actor extends Game_Battler {
+   isWtypeEquipped(wtypeId: WeaponType): boolean
+   refresh(): void
+   hide(): void
+-  isActor(): boolean
++  isActor(): this is Game_Actor
+   friendsUnit(): import("./Game_Party").Game_Party
+   opponentsUnit(): import("./Game_Troop").Game_Troop
+   index(): number
+diff --git a/node_modules/rmmz-types/lib/objects/Game_Enemy.d.ts b/node_modules/rmmz-types/lib/objects/Game_Enemy.d.ts
+index a0bd9db..7827f03 100644
+--- a/node_modules/rmmz-types/lib/objects/Game_Enemy.d.ts
++++ b/node_modules/rmmz-types/lib/objects/Game_Enemy.d.ts
+@@ -15,7 +15,7 @@ export declare class Game_Enemy extends Game_Battler {
+   constructor(enemyId: EnemyID, x: number, y: number)
+   initMembers(): void
+   setup(enemyId: EnemyID, x: number, y: number): void
+-  isEnemy(): boolean
++  isEnemy(): this is Game_Enemy
+   friendsUnit(): import("./Game_Troop").Game_Troop
+   opponentsUnit(): import("./Game_Party").Game_Party
+   index(): number
+diff --git a/node_modules/rmmz-types/lib/objects/Game_Map.d.ts b/node_modules/rmmz-types/lib/objects/Game_Map.d.ts
+index 2395053..19d4395 100644
+--- a/node_modules/rmmz-types/lib/objects/Game_Map.d.ts
++++ b/node_modules/rmmz-types/lib/objects/Game_Map.d.ts
+@@ -35,6 +35,7 @@ export declare class Game_Map {
+   _battleback2Name: string | null
+   _needsRefresh: boolean
+   constructor()
++  initialize(): void
+   setup(mapId: MapID): void
+   isEventRunning(): boolean
+   tileWidth(): number
