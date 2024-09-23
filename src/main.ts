@@ -23,19 +23,21 @@ interface IPluginParams {
 
 export var presetMap: Map<string, IDotMoveSystemPreset> = new Map();
 export var eventDefault: IDotMoveSystemPreset = {};
+export var aliases: Record<string, (...args: any[]) => any> = {};
+
+function isValidNumber(num: any) {
+    return typeof num === 'number' && isFinite(num) && !isNaN(num);
+}
+
+function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
+    Object.keys(obj1).forEach(key => {
+        const value = obj1[key];
+        if (isValidNumber(value)) obj2[key] = value;
+    });
+}
 
 // Parse plugin parameters in header
 {
-    function isValidNumber(num: any) {
-        return typeof num === 'number' && isFinite(num) && !isNaN(num);
-    }
-
-    function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
-        Object.keys(obj1).forEach(key => {
-            const value = obj1[key];
-            if (isValidNumber(value)) obj2[key] = value;
-        });
-    }
 
     let pluginParams: IPluginParams;
 
