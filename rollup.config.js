@@ -6,12 +6,20 @@ import { readFileSync } from 'fs';
 
 import pkg from './package.json';
 
-const header = readFileSync(`${__dirname}/dist/annotations.js`)
-                + '\n'
-                + readFileSync('header.js', 'utf-8');
+const header =
+    '/*'
+    + '\n'
+    + readFileSync(`${__dirname}/LICENSE`).toString().trim()
+    + '\n'
+    + '*/'
+    + '\n'
+    + '\n'
+    + readFileSync(`${__dirname}/dist/annotations.js`)
+    + '\n'
+    + readFileSync('header.js', 'utf-8');
 
 export default [
-	{
+    {
         input: 'src/main.ts',
         output: [
             {
@@ -41,5 +49,5 @@ export default [
         plugins: [
             typescript()
         ]
-	}
+    }
 ];
