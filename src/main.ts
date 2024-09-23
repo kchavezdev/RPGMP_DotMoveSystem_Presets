@@ -70,7 +70,13 @@ function isValidIdentifier(id: string) {
     const presetParams = pluginParams.presets;
 
     if (Array.isArray(presetParams)) {
-        presetParams.forEach(preset => {
+
+        // grabbing raw PluginManager.parameters presets array solely to show the un-processed string in the error message
+        const scriptName = (document['currentScript']!['src'] as string).split("/").pop()!.replace(/\.js$/, "");
+        const rawParams = PluginManager.parameters(scriptName).presets;
+        const rawPresets: { id: string, dotMoveProperties: string }[] = JsonEx.parse(rawParams.presets);
+
+        presetParams.forEach((preset, index) => {
             const properties = preset.dotMoveProperties;
             if (typeof properties === 'object') {
 
@@ -79,12 +85,10 @@ function isValidIdentifier(id: string) {
                 if (!isValidIdentifier(id)) {
                     throw new Error(
                         `DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain any of these characters: 
-                        [${restrictedCharacters.toString()}]`
+                        [${restrictedCharacters.toString()}]
+                        
+                        Raw preset value: ${rawPresets[index].id}`
                     );
-                }
-
-                if (id === '[object Object]') {
-                    console.warn('DotMoveSystem_Preset: The identifier of at least one preset is [object Object]');
                 }
 
                 const presetToAdd: IDotMoveSystemPreset = {};
