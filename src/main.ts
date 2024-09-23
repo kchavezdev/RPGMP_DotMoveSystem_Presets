@@ -54,6 +54,17 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
         presetParams.forEach(preset => {
             const properties = preset.dotMoveProperties;
             if (typeof properties === 'object') {
+
+                const id = preset.id.toString();
+
+                if (id.contains(',')) {
+                    throw new Error('DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain \',\' character!');
+                }
+
+                if (id === '[object Object]') {
+                    console.warn('DotMoveSystem_Preset: The identifier of at least one preset is [object Object]');
+                }
+
                 const presetToAdd: IDotMoveSystemPreset = {};
                 copyNumberProperties(properties, presetToAdd);
 

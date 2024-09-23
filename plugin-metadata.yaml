@@ -34,7 +34,7 @@ structs:
     params:
       - name: id
         description: Case-sensitive identifier for this preset.
-          You will use this in the note tag to load this preset.
+          You may not use comma (,) characters.
         text: Identifier
       - name: dotMoveProperties
         description:
