@@ -1,22 +1,3 @@
-interface IDotMoveSystemPreset {
-    width: number,
-    height: string,
-    offsetX: number,
-    offsetY: number,
-    slideLengthX: number,
-    slideLengthY: number,
-    transferOffsetX: number,
-    transferOffsetY: number
-}
-
-interface IPluginParamCharInfo extends IDotMoveSystemPreset {
-    id: string
-}
-
-interface IPluginParams {
-    presets: IPluginParamCharInfo[] | ''
-}
-
 export class PluginParameterParser {
     static convertEscapeCharacters(text: string, event?: Game_Event) {
         // game variable replacements
@@ -26,32 +7,32 @@ export class PluginParameterParser {
             text = text.replace(/\x1b\x1b/g, '\\');
             text = text.replace(/\x1bV\[(\d+)\]/gi, (_, args) => $gameVariables.value(args).toString());
         }
-    
+
         // game switch replacements
         text = text.replace(/\x1bS\[(\d+)\]/gi, (_, args) => $gameSwitches.value(args) ? 'true' : 'false');
-    
+
         // game self switch replacements
         if (event) {
             text = text.replace(/\x1bSS\[([ABCD])\]/gi, (_, args) => $gameSelfSwitches.value([event['_mapId'], event['_eventId'], args.toUpperCase()]) ? 'true' : 'false');
         }
-    
+
         text = text.replace(/\x1b/g, '\\');
-    
+
         return text;
     }
 
-    static tryParseParameter (param: any, event?: Game_Event) {
+    static tryParseParameter(param: any, event?: Game_Event) {
         if (typeof param !== 'string') return param;
-    
+
         // first try parsing as an object
         try {
             return JsonEx.parse(param);
         } catch (error) {
-    
+
         }
-    
+
         param = this.convertEscapeCharacters(param);
-    
+
         // this ensures param JUST has numbers in it
         // Number('') returns 0, which is undesirable
         // parseFloat('123abc') returns 123, which is also not wanted
@@ -60,15 +41,15 @@ export class PluginParameterParser {
         if (num === parseFloat(param)) {
             return num;
         }
-    
+
         if (param === 'true') {
             return true;
         }
-    
+
         if (param === 'false') {
             return false;
         }
-    
+
         // if those failed, it's probably a string so leave alone
         return param;
     }
@@ -81,10 +62,43 @@ export class PluginParameterParser {
     }
 }
 
-export var presetMap: Map<string,IDotMoveSystemPreset>;
+interface IDotMoveSystemPreset {
+    width?: number,
+    height?: string,
+    offsetX?: number,
+    offsetY?: number,
+    slideLengthX?: number,
+    slideLengthY?: number,
+    transferOffsetX?: number,
+    transferOffsetY?: number
+}
+
+interface ICharacterPreset {
+    id: string
+    dotMoveProperties: IDotMoveSystemPreset | ''
+}
+
+interface IPluginParams {
+    presets: ICharacterPreset[] | ''
+    eventDefaultProperties: ICharacterPreset | ''
+}
+
+export var presetMap: Map<string, IDotMoveSystemPreset> = new Map();
+export var eventDefault: IDotMoveSystemPreset = {};
 
 {
-    let pluginParams: {presets: IPluginParamCharInfo[] | ''};
+    function isValidNumber(num: any) {
+        return typeof num === 'number' && isFinite(num) && !isNaN(num);
+    }
+
+    function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
+        Object.keys(obj1).forEach(key => {
+            const value = obj1[key];
+            if (isValidNumber(value)) obj2[key] = value;
+        });
+    }
+
+    let pluginParams: IPluginParams;
 
     if (window.PluginManagerEx) {
         pluginParams = PluginManagerEx!.createParameter(document.currentScript!);
@@ -97,18 +111,18 @@ export var presetMap: Map<string,IDotMoveSystemPreset>;
 
     if (Array.isArray(presetParams)) {
         presetParams.forEach(preset => {
-            const presetToAdd: IDotMoveSystemPreset = {
-                width: preset.width,
-                height: preset.height,
-                offsetX: preset.offsetX,
-                offsetY: preset.offsetY,
-                transferOffsetX: preset.transferOffsetX,
-                transferOffsetY: preset.transferOffsetY,
-                slideLengthX: preset.slideLengthX,
-                slideLengthY: preset.slideLengthY
-            }
+            const properties = preset.dotMoveProperties;
+            if (typeof properties === 'object') {
+                const presetToAdd: IDotMoveSystemPreset = {};
+                copyNumberProperties(properties, presetToAdd);
 
-            presetMap.set(preset.id, presetToAdd);
+                presetMap.set(preset.id, presetToAdd);
+            }
         });
     }
+
+    const paramEventDefaults = pluginParams.eventDefaultProperties;
+    if (paramEventDefaults && typeof paramEventDefaults === 'object') {
+        copyNumberProperties(paramEventDefaults, eventDefault);
+    } 
 }
