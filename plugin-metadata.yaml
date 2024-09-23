@@ -36,7 +36,7 @@ structs:
     params:
       - name: id
         description: Case-sensitive identifier for this preset.
-          You may not use comma (,) characters.
+          ID cannot contain ',', '}', or '{'.
         text: Identifier
       - name: dotMoveProperties
         description:

@@ -21,6 +21,7 @@ interface IPluginParams {
     eventDefaultProperties: ICharacterPreset | ''
 }
 
+export var restrictedCharacters = [',', '{', '}']
 export var presetMap: Map<string, IDotMoveSystemPreset> = new Map();
 export var eventDefault: IDotMoveSystemPreset = {};
 export var aliases: Record<string, (...args: any[]) => any> = {};
@@ -34,6 +35,15 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
         const value = obj1[key];
         if (isValidNumber(value)) obj2[key] = value;
     });
+}
+
+// Returns true if stringToSearch contains any of the strings passed in as the rest of the arguments.
+function stringContainsAny(stringToSearch: string, ...stringsToCheckFor: string[]) {
+    return stringsToCheckFor.some(str => stringToSearch.contains(str));
+}
+
+function isValidIdentifier(id: string) {
+    return !stringContainsAny(id, ...restrictedCharacters);
 }
 
 // Parse plugin parameters in header
@@ -56,8 +66,11 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
 
                 const id = preset.id.toString();
 
-                if (id.contains(',')) {
-                    throw new Error('DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain \',\' character!');
+                if (isValidIdentifier(id)) {
+                    throw new Error(
+                        `DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain any of these characters: 
+                        [${restrictedCharacters.toString()}]`
+                    );
                 }
 
                 if (id === '[object Object]') {
