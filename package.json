@@ -16,7 +16,7 @@
   "keywords": [
     "RMMZ"
   ],
-  "author": "Comuns",
+  "author": "K. Chavez",
   "license": "MIT",
   "devDependencies": {
     "@comuns-rpgmaker/plugin-metadata": "^0.2.5",
