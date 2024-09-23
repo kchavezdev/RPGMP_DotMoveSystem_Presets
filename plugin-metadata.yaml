@@ -2,115 +2,126 @@ target: MZ
 author: K. Chavez
 description: "[1.0.0]DotMoveSystem presets addon."
 help: |-
-    DotMoveSystem_Presets
+  DotMoveSystem_Presets
 
-    Placeholder help section.
+  Placeholder help section.
 params:
   - name: eventDefaultProperties
     struct: CharacterDotMoveProperties
     text: Event Defaults
     description:
       default: Default DotMoveSystem properties of events.
-    default: {"Width":"1","Height":"1","OffsetX":"0","OffsetY":"0","SlideLengthX":"0.5","SlideLengthY":"0.5","TransferOffsetX":"0","TransferOffsetY":"0"}
+    default:
+      {
+        "width": "1",
+        "height": "1",
+        "widthArea": "0.5",
+        "heightArea": "0.5",
+        "offsetX": "0",
+        "offsetY": "0",
+        "slideLengthX": "0.5",
+        "slideLengthY": "0.5",
+      }
   - name: presets
     type: array
     text: Presets
-    description: 
+    description:
       default: Preset DotMoveSystem character parameters.
     struct: CharacterPreset
     default: []
 structs:
-    - name: CharacterPreset
-      params:
-        - name: id
-          description:
-              Case-sensitive identifier for this preset.
-              You will use this in the note tag to load this preset.
-          text: Identifier
-        - name: dotMoveProperties
-          description:
-            default: The DotMoveSystem properties of characters using this preset.
-          text:
-            default: Properties
-          struct: CharacterDotMoveProperties
-    - name: CharacterDotMoveProperties
-      params:
-        - name: width
-          description:
-              default: Width of the character.
-          text:
-              default: Width
-          type: number
-          decimals: 2
-          default: 1
+  - name: CharacterPreset
+    params:
+      - name: id
+        description: Case-sensitive identifier for this preset.
+          You will use this in the note tag to load this preset.
+        text: Identifier
+      - name: dotMoveProperties
+        description:
+          default: The DotMoveSystem properties of characters using this preset.
+        text:
+          default: Properties
+        struct: CharacterDotMoveProperties
+  - name: CharacterDotMoveProperties
+    params:
+      - name: width
+        description:
+          default: Width of the character.
+        text:
+          default: Width
+        type: number
+        decimals: 2
+        default: 1
 
-        - name: height
-          description:
-              default: Height of the character.
-          text:
-              default: Height
-          type: number
-          decimals: 2
-          default: 1
+      - name: height
+        description:
+          default: Height of the character.
+        text:
+          default: Height
+        type: number
+        decimals: 2
+        default: 1
 
-        - name: offsetX
-          description:
-              default: X offset of the character.
-          text:
-              default: X Offset
-          type: number
-          min: -1000
-          decimals: 2
-          default: 0
+      - name: widthArea
+        description:
+          default: Width of event trigger area.
+        text:
+          default: Width Area
+        type: number
+        min: 0
+        max: 1
+        decimals: 2
+        default: 0.5
 
-        - name: offsetY
-          description:
-              default: Y offset of the character.
-          text:
-              default: Y Offset
-          type: number
-          min: -1000
-          decimals: 2
-          default: 0
+      - name: heightArea
+        description:
+          default: Width of event trigger area.
+        text:
+          default: Height Area
+        type: number
+        min: 0
+        max: 1
+        decimals: 2
+        default: 0.5
 
-        - name: slideLengthX
-          description:
-              default: |-
-                  Slide length of the character on the x axis.
-                  This is used for corner correction when moving.
-          text:
-              default: X-Axis Slide Length
-          type: number
-          decimals: 2
-          default: 0.5
+      - name: offsetX
+        description:
+          default: X offset of the character.
+        text:
+          default: X Offset
+        type: number
+        min: -1000
+        decimals: 2
+        default: 0
 
-        - name: slideLengthY
-          description:
-              default: |-
-                  Slide length of the character on the y axis.
-                  This is used for corner correction when moving.
-          text:
-              default: Y-Axis Slide Length
-          type: number
-          decimals: 2
-          default: 0.5
+      - name: offsetY
+        description:
+          default: Y offset of the character.
+        text:
+          default: Y Offset
+        type: number
+        min: -1000
+        decimals: 2
+        default: 0
 
-        - name: transferOffsetX
-          description:
-              default: X coordinate offset when moving to a location.
-          text:
-              default: Transfer X Offset
-          type: number
-          min: -1000
-          decimals: 2
-          default: 0
+      - name: slideLengthX
+        description:
+          default: |-
+            Slide length of the character on the x axis.
+            This is used for corner correction when moving.
+        text:
+          default: X-Axis Slide Length
+        type: number
+        decimals: 2
+        default: 0.5
 
-        - name: transferOffsetY
-          description:
-              default: Y coordinate offset when moving to a location.
-          text:
-              default: Transfer Y Offset
-          type: number
-          min: -1000
-          decimals: 2
-          default: 0
+      - name: slideLengthY
+        description:
+          default: |-
+            Slide length of the character on the y axis.
+            This is used for corner correction when moving.
+        text:
+          default: Y-Axis Slide Length
+        type: number
+        decimals: 2
+        default: 0.5

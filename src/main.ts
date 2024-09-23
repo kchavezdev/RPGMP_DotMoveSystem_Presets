@@ -2,13 +2,13 @@ import { PluginParameterParser } from "PluginParameterParser"
 
 interface IDotMoveSystemPreset {
     width?: number,
-    height?: string,
+    height?: number,
+    widthArea?: number,
+    heightArea?: number,
     offsetX?: number,
     offsetY?: number,
     slideLengthX?: number,
     slideLengthY?: number,
-    transferOffsetX?: number,
-    transferOffsetY?: number
 }
 
 interface ICharacterPreset {
@@ -24,6 +24,7 @@ interface IPluginParams {
 export var presetMap: Map<string, IDotMoveSystemPreset> = new Map();
 export var eventDefault: IDotMoveSystemPreset = {};
 
+// Parse plugin parameters in header
 {
     function isValidNumber(num: any) {
         return typeof num === 'number' && isFinite(num) && !isNaN(num);
