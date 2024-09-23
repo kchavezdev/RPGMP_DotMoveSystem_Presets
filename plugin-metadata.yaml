@@ -1,14 +1,24 @@
 target: MZ
-author: Comuns
-description: Typescript plugin archetype
+author: K. Chavez
+description: "[1.0.0]DotMoveSystem presets addon."
 help: |-
-    Typescript Plugin Archetype.
+    DotMoveSystem_Presets
 
-    This is a plugin archetype, it does not provide any functionality, only a
-    template for other plugins.
+    Placeholder help section.
+params:
+  - type: array
+    name: presets
+    text: Presets
+    description: Preset DotMoveSystem character parameters.
+    struct: CharacterInfoPreset
 structs:
-    - name: CharacterInfo
+    - name: CharacterInfoPreset
       params:
+          - name: id
+            description:
+                Case-sensitive identifier for this preset.
+                You will use this in the note tag to load this preset.
+            text: Identifier
           - name: width
             description:
                 default: Width of the character.
