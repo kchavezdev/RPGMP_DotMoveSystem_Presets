@@ -37,6 +37,16 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
     });
 }
 
+function convertEscapeCharacters(param: string) {
+    if (typeof param !== 'string') return param;
+    if (window.PluginManagerEx) {
+        return PluginManagerEx!.convertVariables(param);
+    }
+    else {
+        return PluginParameterParser.convertEscapeCharacters(param);
+    }
+}
+
 // Returns true if stringToSearch contains any of the strings passed in as the rest of the arguments.
 function stringContainsAny(stringToSearch: string, ...stringsToCheckFor: string[]) {
     return stringsToCheckFor.some(str => stringToSearch.contains(str));
