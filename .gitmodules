@@ -1,0 +1,3 @@
+[submodule "include/rmmz-typedefines"]
+	path = include/rmmz-typedefines
+	url = https://github.com/kchavezdev/RMMZ-TypeDefines

@@ -28,9 +28,6 @@ export default [
                     })
                 ],
                 generatedCode: 'es2015',
-                globals: {
-                    'rmmz-types': 'window'
-                }
             },
             {
                 file: `${pkg.testProjectDir || `${__dirname}/dist`}/js/plugins/${pkg.name}.debug.js`,
@@ -39,9 +36,6 @@ export default [
                 sourcemap: true,
                 banner: header,
                 generatedCode: 'es2015',
-                globals: {
-                    'rmmz-types': 'window'
-                }
             }
         ],
         plugins: [

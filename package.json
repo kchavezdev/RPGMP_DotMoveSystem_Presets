@@ -1,14 +1,13 @@
 {
-  "name": "rmmz-typescript-plugin-archetype",
+  "name": "DotMoveSystem_Presets",
   "version": "1.0.0",
   "description": "DotMoveSystem addon that lets the user create presets for character DotMoveSystem properties.",
-  "namespace": "KCDev.DotMoveSystem.Preset",
+  "namespace": "KCDev.DotMoveSystem.Presets",
   "scripts": {
     "prebuild": "mz-mtdt -i ./plugin-metadata.yaml -o dist/annotations.js",
     "build": "rollup -c",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
-    "coverage": "nyc -r lcov -e .ts -x \"spec/*\" npm run test",
-    "postinstall": "patch-package"
+    "coverage": "nyc -r lcov -e .ts -x \"spec/*\" npm run test"
   },
   "repository": {
     "type": "git",
@@ -30,18 +29,10 @@
     "eslint": "^7.32.0",
     "jasmine": "^3.99.0",
     "nyc": "^15.1.0",
-    "patch-package": "^8.0.0",
-    "rmmz-types": "^1.5.0-3",
     "rollup": "^2.76.0",
     "rollup-plugin-terser": "^7.0.2",
     "ts-node": "^9.1.1",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
-  },
-  "overrides": {
-    "rmmz-types": {
-      "localforage": "1.7.3",
-      "pixi.js": "5.2.4"
-    }
   }
 }

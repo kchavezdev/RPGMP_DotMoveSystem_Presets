@@ -9,6 +9,6 @@
         "baseUrl": "src",
         "moduleResolution": "Node"
     },
-    "include": ["src/**/*", "spec/**/*"],
+    "include": ["src/**/*", "spec/**/*", "include/**/*"],
     "exclude": ["node_modules"]
 }
