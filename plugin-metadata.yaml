@@ -1,6 +1,8 @@
 target: MZ
 author: K. Chavez
 description: "[1.0.0]DotMoveSystem presets addon."
+base:
+  - DotMoveSystem
 help: |-
   DotMoveSystem_Presets
 
