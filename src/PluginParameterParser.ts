@@ -26,7 +26,13 @@ export class PluginParameterParser {
 
         // first try parsing as an object
         try {
-            return JsonEx.parse(param);
+            const p = JsonEx.parse(param);
+            if (Array.isArray(p)) {
+                for (let i = 0; i < p.length; i++) {
+                    p[i] = this.tryParseParameter(p[i]);
+                }
+            }
+            return p;
         } catch (error) {
 
         }
