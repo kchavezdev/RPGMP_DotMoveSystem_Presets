@@ -38,14 +38,13 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
 
 // Parse plugin parameters in header
 {
-
     let pluginParams: IPluginParams;
 
     if (window.PluginManagerEx) {
         pluginParams = PluginManagerEx!.createParameter(document.currentScript!);
     }
     else {
-        pluginParams = PluginParameterParser.getPluginParameters(document['currentScript']!['src'] as string)
+        pluginParams = PluginParameterParser.getPluginParameters(document.currentScript!);
     }
 
     const presetParams = pluginParams.presets;

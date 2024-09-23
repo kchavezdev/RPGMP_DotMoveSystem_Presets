@@ -62,8 +62,8 @@ export class PluginParameterParser {
         return param;
     }
 
-    static getPluginParameters(scriptName: string) {
-        const rawParams = PluginManager.parameters(scriptName.split("/").pop()!.replace(/\.js$/, ""));
+    static getPluginParameters(currentScript: NonNullable<typeof document.currentScript>) {
+        const rawParams = PluginManager.parameters((currentScript['src'] as string).split("/").pop()!.replace(/\.js$/, ""));
         const parsedParams: any = {};
         Object.keys(rawParams).forEach(key => parsedParams[key] = this.tryParseParameter(rawParams[key]));
         return parsedParams;
