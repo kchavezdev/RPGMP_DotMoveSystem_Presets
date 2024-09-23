@@ -22,17 +22,19 @@ export class PluginParameterParser {
     }
 
     static tryParseParameter(param: any, event?: Game_Event) {
-        if (typeof param !== 'string') return param;
+        if (Array.isArray(param)) {
+            for (let i = 0; i < param.length; i++) {
+                param[i] = this.tryParseParameter(param[i]);
+            }
+        }
+
+        if (typeof param !== 'string') {
+            return param;
+        }
 
         // first try parsing as an object
         try {
-            const p = JsonEx.parse(param);
-            if (Array.isArray(p)) {
-                for (let i = 0; i < p.length; i++) {
-                    p[i] = this.tryParseParameter(p[i]);
-                }
-            }
-            return p;
+            return this.tryParseParameter(JsonEx.parse(param));
         } catch (error) {
 
         }
