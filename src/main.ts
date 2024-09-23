@@ -76,7 +76,7 @@ function isValidIdentifier(id: string) {
 
                 const id = preset.id.toString();
 
-                if (isValidIdentifier(id)) {
+                if (!isValidIdentifier(id)) {
                     throw new Error(
                         `DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain any of these characters: 
                         [${restrictedCharacters.toString()}]`
