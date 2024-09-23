@@ -22,9 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/* @ts-expect-error */
-import {Game_CharacterBase, Game_Player, Game_Event, Game_Follower} from 'rmmz-types';
-
 declare interface Window {
     MoverData: new () => DotMoveSystem.MoverData;
 }
