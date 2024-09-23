@@ -11,6 +11,7 @@ params:
     text: Presets
     description: Preset DotMoveSystem character parameters.
     struct: CharacterInfoPreset
+    default: []
 structs:
     - name: CharacterInfoPreset
       params:
