@@ -31,10 +31,10 @@ function isValidNumber(num: any) {
 }
 
 function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
-    Object.keys(obj1).forEach(key => {
+    for (const key of Object.keys(obj1)) {
         const value = obj1[key];
         if (isValidNumber(value)) obj2[key] = value;
-    });
+    };
 }
 
 function convertEscapeCharacters(param: string) {
