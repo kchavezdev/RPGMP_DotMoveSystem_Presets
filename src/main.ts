@@ -75,7 +75,7 @@ function isValidIdentifier(id: string) {
 
         // grabbing raw PluginManager.parameters presets array solely to show the un-processed string in the error message
         const scriptName = (document['currentScript']!['src'] as string).split("/").pop()!.replace(/\.js$/, "");
-        const rawParams = PluginManager.parameters(scriptName).presets;
+        const rawParams = PluginManager.parameters(scriptName);
         const rawPresets: { id: string, dotMoveProperties: string }[] = JsonEx.parse(rawParams.presets);
 
         presetParams.forEach((preset, index) => {
