@@ -37,13 +37,13 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
     };
 }
 
-function convertEscapeCharacters(param: string) {
+function parseSingle(param: string, event?: Game_Event) {
     if (typeof param !== 'string') return param;
     if (window.PluginManagerEx) {
-        return PluginManagerEx!.convertVariables(param);
+        return PluginManagerEx?.convertVariables(param, event);
     }
     else {
-        return PluginParameterParser.convertEscapeCharacters(param);
+        return PluginParameterParser.tryParseParameter(param, event);
     }
 }
 
