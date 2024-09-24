@@ -24,7 +24,9 @@ interface IPluginParams {
 export var restrictedCharacters = [',', '{', '}']
 export var presetMap: Map<string, IDotMoveSystemPreset> = new Map();
 export var eventDefault: IDotMoveSystemPreset = {};
-export var aliases: Record<string, (...args: any[]) => any> = {};
+export var aliases = {
+    EventDotMoveTempData_prototype_initialize: DotMoveSystem.EventDotMoveTempData.prototype.initialize
+};
 
 function isValidNumber(num: any) {
     return typeof num === 'number' && isFinite(num) && !isNaN(num);
@@ -37,7 +39,7 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
     };
 }
 
-function parseSingle(param: string, event?: Game_Event) {
+function parseSingle(param: any, event?: Game_Event) {
     if (typeof param !== 'string') return param;
     if (window.PluginManagerEx) {
         return PluginManagerEx?.convertVariables(param, event);
@@ -105,4 +107,43 @@ function isValidIdentifier(id: string) {
     }
 }
 
+function tryApplyPresetValue(DotMoveTempData: DotMoveSystem.EventDotMoveTempData, propertyName: string, presetValue: any) {
+    if (isValidNumber(presetValue)) {
+        DotMoveTempData[propertyName] = presetValue as number;
+    }
+}
 
+aliases.EventDotMoveTempData_prototype_initialize = DotMoveSystem.EventDotMoveTempData.prototype.initialize;
+DotMoveSystem.EventDotMoveTempData.prototype.initialize = function (this: DotMoveSystem.EventDotMoveTempData, character) {
+    aliases.EventDotMoveTempData_prototype_initialize.apply(this, arguments);
+    const meta = (character.getAnnotationValues(0));
+    const presetIdentifiers = meta.dotPreset;
+    if (presetIdentifiers) {
+        for (const presetId of presetIdentifiers.split(',')) {
+            const preset = presetMap.get(presetId);
+            if (preset) {
+                tryApplyPresetValue(this, '_width', preset.width);
+                tryApplyPresetValue(this, '_height', preset.height);
+                tryApplyPresetValue(this, '_offsetX', preset.offsetX);
+                tryApplyPresetValue(this, '_offsetY', preset.offsetY);
+                tryApplyPresetValue(this, '_widthArea', preset.widthArea);
+                tryApplyPresetValue(this, '_heightArea', preset.heightArea);
+                tryApplyPresetValue(this, '_slideLengthX', preset.slideLengthX);
+                tryApplyPresetValue(this, '_slideLengthY', preset.slideLengthY);
+            }
+            else {
+                console.warn(`DotMoveSystem_Presets: Unknown preset identifier '${presetId}' passed in to event ${character.eventId()}`);
+            }
+        }
+
+        // once all presets applied, re-apply first page note settings
+        tryApplyPresetValue(this, '_width', parseSingle(meta.width, character));
+        tryApplyPresetValue(this, '_height', parseSingle(meta.height, character));
+        tryApplyPresetValue(this, '_offsetX', parseSingle(meta.offsetX, character));
+        tryApplyPresetValue(this, '_offsetY', parseSingle(meta.offsetY, character));
+        tryApplyPresetValue(this, '_widthArea', parseSingle(meta.widthArea, character));
+        tryApplyPresetValue(this, '_heightArea', parseSingle(meta.heightArea, character));
+        tryApplyPresetValue(this, '_slideLengthX', parseSingle(meta.slideLengthX, character));
+        tryApplyPresetValue(this, '_slideLengthY', parseSingle(meta.slideLengthY, character));
+    }
+};
