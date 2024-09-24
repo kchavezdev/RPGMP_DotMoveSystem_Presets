@@ -127,6 +127,9 @@ function tryApplyPresetStruct(DotMoveTempData: DotMoveSystem.EventDotMoveTempDat
 aliases.EventDotMoveTempData_prototype_initialize = DotMoveSystem.EventDotMoveTempData.prototype.initialize;
 DotMoveSystem.EventDotMoveTempData.prototype.initialize = function (this: DotMoveSystem.EventDotMoveTempData, character) {
     aliases.EventDotMoveTempData_prototype_initialize.apply(this, arguments);
+
+    tryApplyPresetStruct(this, eventDefault);
+
     const meta = (character.getAnnotationValues(0));
     const presetIdentifiers = meta.dotPreset;
     if (presetIdentifiers) {
