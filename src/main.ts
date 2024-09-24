@@ -80,7 +80,7 @@ function isValidIdentifier(id: string) {
             const properties = preset.dotMoveProperties;
             if (typeof properties === 'object') {
 
-                const id = preset.id.toString();
+                const id = preset.id.toString().trim();
 
                 if (!isValidIdentifier(id)) {
                     throw new Error(
