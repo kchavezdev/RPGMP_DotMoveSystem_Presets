@@ -76,7 +76,7 @@ function isValidIdentifier(id: string) {
         // grabbing raw PluginManager.parameters presets array solely to show the un-processed string in the error message
         const scriptName = (document['currentScript']!['src'] as string).split("/").pop()!.replace(/\.js$/, "");
         const rawParams = PluginManager.parameters(scriptName);
-        const rawPresets: { id: string, dotMoveProperties: string }[] = JsonEx.parse(rawParams.presets);
+        const rawPresets: string[] = JsonEx.parse(rawParams.presets);
 
         presetParams.forEach((preset, index) => {
             const properties = preset.dotMoveProperties;
@@ -89,7 +89,7 @@ function isValidIdentifier(id: string) {
                         `DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain any of these characters: 
                         [${restrictedCharacters.toString()}]
                         
-                        Raw preset value: ${rawPresets[index].id}`
+                        Raw preset value: ${JsonEx.parse(rawPresets[index]).id}`
                     );
                 }
 
