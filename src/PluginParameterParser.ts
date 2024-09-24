@@ -21,11 +21,21 @@ export class PluginParameterParser {
         return text;
     }
 
+    /** Returns true if obj is a Record<string,any> */
+    static isRecordObject(obj: any) {
+        return !!obj && obj.constructor === Object;
+    }
+
     static tryParseParameter(param: any, event?: Game_Event) {
         if (Array.isArray(param)) {
             for (let i = 0; i < param.length; i++) {
                 param[i] = this.tryParseParameter(param[i]);
             }
+            return param;
+        }
+
+        if (this.isRecordObject(param)) {
+            return this.getParsedObject(param);
         }
 
         if (typeof param !== 'string') {
