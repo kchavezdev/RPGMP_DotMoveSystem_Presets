@@ -62,10 +62,20 @@ export class PluginParameterParser {
         return param;
     }
 
+    static getParsedObject(obj: NonNullable<any>) {
+        const parsedObj: any = {};
+
+        if (obj) {
+            for (const key of Object.keys(obj)) {
+                parsedObj[key] = this.tryParseParameter(obj[key]);
+            }
+        }
+
+        return parsedObj;
+    }
+
     static getPluginParameters(currentScript: NonNullable<typeof document.currentScript>) {
         const rawParams = PluginManager.parameters((currentScript['src'] as string).split("/").pop()!.replace(/\.js$/, ""));
-        const parsedParams: any = {};
-        Object.keys(rawParams).forEach(key => parsedParams[key] = this.tryParseParameter(rawParams[key]));
-        return parsedParams;
+        return this.getParsedObject(rawParams);
     }
 };
