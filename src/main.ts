@@ -113,6 +113,17 @@ function tryApplyPresetValue(DotMoveTempData: DotMoveSystem.EventDotMoveTempData
     }
 }
 
+function tryApplyPresetStruct(DotMoveTempData: DotMoveSystem.EventDotMoveTempData, presetStruct: IDotMoveSystemPreset) {
+    tryApplyPresetValue(DotMoveTempData, '_width', presetStruct.width);
+    tryApplyPresetValue(DotMoveTempData, '_height', presetStruct.height);
+    tryApplyPresetValue(DotMoveTempData, '_offsetX', presetStruct.offsetX);
+    tryApplyPresetValue(DotMoveTempData, '_offsetY', presetStruct.offsetY);
+    tryApplyPresetValue(DotMoveTempData, '_widthArea', presetStruct.widthArea);
+    tryApplyPresetValue(DotMoveTempData, '_heightArea', presetStruct.heightArea);
+    tryApplyPresetValue(DotMoveTempData, '_slideLengthX', presetStruct.slideLengthX);
+    tryApplyPresetValue(DotMoveTempData, '_slideLengthY', presetStruct.slideLengthY);
+}
+
 aliases.EventDotMoveTempData_prototype_initialize = DotMoveSystem.EventDotMoveTempData.prototype.initialize;
 DotMoveSystem.EventDotMoveTempData.prototype.initialize = function (this: DotMoveSystem.EventDotMoveTempData, character) {
     aliases.EventDotMoveTempData_prototype_initialize.apply(this, arguments);
@@ -122,14 +133,7 @@ DotMoveSystem.EventDotMoveTempData.prototype.initialize = function (this: DotMov
         for (const presetId of presetIdentifiers.split(',')) {
             const preset = presetMap.get(presetId);
             if (preset) {
-                tryApplyPresetValue(this, '_width', preset.width);
-                tryApplyPresetValue(this, '_height', preset.height);
-                tryApplyPresetValue(this, '_offsetX', preset.offsetX);
-                tryApplyPresetValue(this, '_offsetY', preset.offsetY);
-                tryApplyPresetValue(this, '_widthArea', preset.widthArea);
-                tryApplyPresetValue(this, '_heightArea', preset.heightArea);
-                tryApplyPresetValue(this, '_slideLengthX', preset.slideLengthX);
-                tryApplyPresetValue(this, '_slideLengthY', preset.slideLengthY);
+                tryApplyPresetStruct(this, preset);
             }
             else {
                 console.warn(`DotMoveSystem_Presets: Unknown preset identifier '${presetId}' passed in to event ${character.eventId()}`);
