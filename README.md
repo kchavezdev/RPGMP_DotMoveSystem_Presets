@@ -10,6 +10,19 @@ remove the dependency on niokasgami's RPG Maker MZ TypeScript definitions. Inste
 this fork uses typescript definitions generated from [RPGMakerMZ_TypeDefine](https://github.com/unagiootoro/RPGMakerMZ_TypeDefine) 
 by [unagiootoro](https://github.com/unagiootoro/).
 
+## Downloads
+If all you care about is downloading the actual plugin file, then you want to 
+grab the [latest release](https://github.com/kchavezdev/RPGMP_DotMoveSystem_Presets/releases/latest).
+
+DotMoveSystem_Presets.js is easier to debug and read in a project but has 
+a slightly larger file size.
+
+DotMoveSystem_Presets.min.js is a minified version of this plugin that 
+saves a few kilobytes of storage space but is unpleasant to work with if 
+you need to read the plugin code for any reason.
+
+Use the version that fits your project best.
+
 ## Getting Started
 
 First of all, make sure you run `npm install` to install all the dependencies
