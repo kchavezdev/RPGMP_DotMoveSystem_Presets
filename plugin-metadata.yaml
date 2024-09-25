@@ -4,9 +4,45 @@ description: "[1.0.0]DotMoveSystem presets addon."
 base:
   - DotMoveSystem
 help: |-
-  DotMoveSystem_Presets
+  DotMoveSystem_Presets.js
 
-  Placeholder help section.
+  This is an addon to unagiootoro's DotMoveSystem plugin.
+
+  To apply a preset to an event, create a comment at the top of the first
+  page of the event.
+  
+  In that comment, use the note tag 'dotPreset'. Here is an example:
+
+  <dotPreset:my_preset>
+
+  This would apply the preset with the identifier "my_preset". Do note that
+  the note tag and preset name are case sensitive. So, <DOTPRESET:my_preset>
+  would not work and <dotPreset:My_Preset> would also not work.
+
+  You can change the default parameters events get loaded with and define
+  preset values for the plugin's dot movement system properties.
+
+  You may NOT use any of the following characters in preset names:
+
+  , { }
+
+  Additionally, any whitespace at the start and end of the identifier will
+  be trimmed, so identifiers "   example " and "example" would be identical.
+
+  Any properties left blank will not be changed on the character.
+
+  Using the fact that blank properties in your preset will not be set, you
+  can stack presets by separating their idenfitifers with commas. You can
+  also use the text input mode or the delete key to remove properties from
+  a preset.
+  
+  Consider the following tag:
+
+  <dotPreset:preset_1,preset_2,preset_3>
+
+  First, preset_1 would be applied and then preset_2, then preset_3,
+  and so on.
+
 params:
   - name: eventDefaultProperties
     struct: CharacterDotMoveProperties
