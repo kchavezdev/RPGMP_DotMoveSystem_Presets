@@ -1,5 +1,6 @@
 target: MZ
 author: K. Chavez
+url: https://github.com/kchavezdev/RPGMP_DotMoveSystem_Presets
 description: "[1.0.0]DotMoveSystem presets addon."
 base:
   - DotMoveSystem
