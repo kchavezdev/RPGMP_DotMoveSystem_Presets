@@ -1,5 +1,7 @@
 import { PluginParameterParser } from "PluginParameterParser"
 
+export var ParameterParser = PluginParameterParser;
+
 interface IDotMoveSystemPreset {
     width?: number,
     height?: number,
