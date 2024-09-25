@@ -2,7 +2,7 @@
     "compilerOptions": {
         "esModuleInterop": true,
         "target": "ES6",
-        "lib": ["ES5", "ES6", "DOM"],
+        "lib": ["ES6", "DOM"],
         "downlevelIteration": true,
         "removeComments": true,
         "strictNullChecks": true,
