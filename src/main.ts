@@ -18,7 +18,7 @@ interface ICharacterPreset {
 
 interface IPluginParams {
     presets: ICharacterPreset[] | ''
-    eventDefaultProperties: ICharacterPreset | ''
+    eventDefaultProperties: IDotMoveSystemPreset | ''
 }
 
 export var restrictedCharacters = [',', '{', '}']
@@ -32,8 +32,8 @@ function isValidNumber(num: any) {
     return typeof num === 'number' && isFinite(num) && !isNaN(num);
 }
 
-function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
-    for (const key of Object.keys(obj1)) {
+function copyPresetNumberProps(obj1: IDotMoveSystemPreset, obj2: IDotMoveSystemPreset) {
+    for (const key of ['width', 'height', 'widthArea', 'heightArea', 'offsetX', 'offsetY', 'slideLengthX', 'slideLengthY']) {
         const value = obj1[key];
         if (isValidNumber(value)) obj2[key] = value;
     };
@@ -102,7 +102,7 @@ function isValidIdentifier(id: string) {
                 }
 
                 const presetToAdd: IDotMoveSystemPreset = {};
-                copyNumberProperties(properties, presetToAdd);
+                copyPresetNumberProps(properties, presetToAdd);
 
                 presetMap.set(preset.id, presetToAdd);
             }
@@ -111,7 +111,7 @@ function isValidIdentifier(id: string) {
 
     const paramEventDefaults = pluginParams.eventDefaultProperties;
     if (paramEventDefaults && typeof paramEventDefaults === 'object') {
-        copyNumberProperties(paramEventDefaults, eventDefault);
+        copyPresetNumberProps(paramEventDefaults, eventDefault);
     }
 }
 
