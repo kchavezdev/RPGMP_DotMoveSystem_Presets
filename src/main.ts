@@ -89,7 +89,15 @@ function isValidIdentifier(id: string) {
                         `DotMoveSystem_Preset: Error parsing presets! Preset identifier cannot contain any of these characters: 
                         [${restrictedCharacters.toString()}]
                         
-                        Raw preset value: ${JsonEx.parse(rawPresets[index]).id}`
+                        Raw ID in parameters: ${JsonEx.parse(rawPresets[index]).id}`
+                    );
+                }
+
+                if (presetMap.has(id)) {
+                    throw new Error(
+                        `DotMoveSystem_Preset: Error! Duplicate preset identifier '${id}' in plugin parameters!
+                        
+                        Raw ID in parameters: ${JsonEx.parse(rawPresets[index]).id}`
                     );
                 }
 
