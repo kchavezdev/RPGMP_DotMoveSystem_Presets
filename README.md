@@ -15,6 +15,9 @@ by [unagiootoro](https://github.com/unagiootoro/).
 First of all, make sure you run `npm install` to install all the dependencies
 for the project, such as [rollup.js](https://rollupjs.org/) and typescript.
 
+Also ensure you've run `git submodule update --init --recursive` to clone the 
+submodules as well.
+
 Make sure to set `package.json` up correctly, changing the package name to that
 of your plugin (this will be used to generate the output file) and adjust the
 values of the `version` and `description` fields (and, optionally, `keywords`).
@@ -36,6 +39,7 @@ By default, the plugin is wrapped into an IIFE and everything you export from
 
 First:
 - `npm install`
+- `git submodule update --init --recursive`
 - Modify `package.json`
 
 Then:
@@ -44,18 +48,6 @@ Then:
 - Your plugin shows up compiled in `dist/js/plugins` (plus a debug build in
   whatever test directory you set up!)
 - Repeat
-
-
-## Contributing
-
-This repo's purpose is **exclusively** providing a basic structure for other
-plugin repos.
-It is **not** the place to create core functionality! (i.e. no application
-code here!)
-
-Changes to this repo **must not** demand that repos derived from it be changed,
-but it **should** be possible to update them to a more recent version of the
-archetype fairly easily.
 
 ## Licensing
 
