@@ -25,8 +25,7 @@ jobs:
             --externalPattern "node_modules/**" \
             --readme README.md \
             --out docs \
-            --entryPointStrategy Merge \
-            src
+            src/**
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
