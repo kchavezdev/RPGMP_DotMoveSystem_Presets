@@ -42,7 +42,7 @@ function copyNumberProperties(obj1: NonNullable<any>, obj2: NonNullable<any>) {
 function parseSingle(param: any, event?: Game_Event) {
     if (typeof param !== 'string') return param;
     if (window.PluginManagerEx) {
-        return PluginManagerEx?.convertVariables(param, event);
+        return PluginManagerEx!.convertVariables(param, event);
     }
     else {
         return PluginParameterParser.tryParseParameter(param, event);
