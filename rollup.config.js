@@ -27,6 +27,14 @@ export default [
                 name: pkg.namespace,
                 format: 'iife',
                 sourcemap: false,
+                banner: header,
+                generatedCode: 'es2015',
+            },
+            {
+                file: `${__dirname}/dist/js/plugins/${pkg.name}.min.js`,
+                name: pkg.namespace,
+                format: 'iife',
+                sourcemap: false,
                 plugins: [
                     terser({
                         format: {
