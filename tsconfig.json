@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
         "esModuleInterop": true,
-        "target": "ES6",
-        "lib": ["ES6", "DOM"],
+        "target": "ES2015",
+        "lib": ["ES2015", "DOM"],
         "downlevelIteration": true,
         "removeComments": true,
         "strictNullChecks": true,
         "baseUrl": "src",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "skipLibCheck": true
     },
     "include": ["src/**/*", "spec/**/*", "include/**/*"],
     "exclude": ["node_modules"]
