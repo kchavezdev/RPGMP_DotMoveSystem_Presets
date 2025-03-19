@@ -152,15 +152,15 @@ DotMoveSystem.EventDotMoveTempData.prototype.initialize = function (this: DotMov
                 console.warn(`DotMoveSystem_Presets: Unknown preset identifier '${presetId}' passed in to event ${character.eventId()}`);
             }
         }
-
-        // once all presets applied, re-apply first page note settings
-        tryApplyPresetValue(this, '_width', parseSingle(meta.width, character));
-        tryApplyPresetValue(this, '_height', parseSingle(meta.height, character));
-        tryApplyPresetValue(this, '_offsetX', parseSingle(meta.offsetX, character));
-        tryApplyPresetValue(this, '_offsetY', parseSingle(meta.offsetY, character));
-        tryApplyPresetValue(this, '_widthArea', parseSingle(meta.widthArea, character));
-        tryApplyPresetValue(this, '_heightArea', parseSingle(meta.heightArea, character));
-        tryApplyPresetValue(this, '_slideLengthX', parseSingle(meta.slideLengthX, character));
-        tryApplyPresetValue(this, '_slideLengthY', parseSingle(meta.slideLengthY, character));
     }
+
+    // once all presets applied, re-apply first page note settings
+    tryApplyPresetValue(this, '_width', parseSingle(meta.width, character));
+    tryApplyPresetValue(this, '_height', parseSingle(meta.height, character));
+    tryApplyPresetValue(this, '_offsetX', parseSingle(meta.offsetX, character));
+    tryApplyPresetValue(this, '_offsetY', parseSingle(meta.offsetY, character));
+    tryApplyPresetValue(this, '_widthArea', parseSingle(meta.widthArea, character));
+    tryApplyPresetValue(this, '_heightArea', parseSingle(meta.heightArea, character));
+    tryApplyPresetValue(this, '_slideLengthX', parseSingle(meta.slideLengthX, character));
+    tryApplyPresetValue(this, '_slideLengthY', parseSingle(meta.slideLengthY, character));
 };
